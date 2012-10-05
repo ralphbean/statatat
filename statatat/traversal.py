@@ -38,7 +38,18 @@ class WidgetApp(object):
     def __getitem__(self, key):
         query = statatat.models.User.query.filter_by(username=key)
         if query.count() != 1:
-            raise KeyError("No such user")
+            return self.handle_floating()
+        else:
+            return self.handle_user(query)
+
+    def handle_floating(self):
+        backend_key = "moksha.livesocket.backend"
+        backend = self.__parent__.request.registry.settings[backend_key]
+
+        return statatat.widgets.graph.make_sysinfo_chart(backend=backend,
+                                                         topic="sysinfo")
+
+    def handle_user(self, query):
         user = query.first()
 
         salt = "TODO MAKE THIS SECRET"

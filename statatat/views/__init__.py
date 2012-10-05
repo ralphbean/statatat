@@ -73,6 +73,12 @@ def webhook(request):
                     prefix, md5(salt + extractor(i)).hexdigest()
                 )
                 hub.send_message(topic=topic, message=commit)
+    elif 'sysinfo' in request.params:
+        sysinfo = request.params['sysinfo']
+        if isinstance(sysinfo, basestring):
+            sysinfo = json.loads(sysinfo)
+        topic = "sysinfo"
+        hub.send_message(topic=topic, message=sysinfo)
     else:
         raise NotImplementedError()
 

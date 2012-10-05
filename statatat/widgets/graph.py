@@ -18,9 +18,25 @@ class MessagesTimeSeries(TimeSeriesChart, LiveWidget):
     # Initialize to n zeros
     data = [0] * n
 
+class FloatingPointMessagesTimeSeries(TimeSeriesChart, LiveWidget):
+    id = 'floating-point-messages-time-series'
+    topic = "*"
+    onmessage = "tw2.store['${id}'].value += json['value'];"
+
+    width = global_width
+    height = 75
+
+    # Keep this many data points
+    n = 100
+    # Initialize to n zeros
+    data = [0] * n
+
 
 def make_chart(backend, topic="*"):
     return MessagesTimeSeries(backend=backend, topic=topic)
+
+def make_sysinfo_chart(backend, topic="*"):
+    return FloatingPointMessagesTimeSeries(backend=backend, topic=topic)
 
 
 class PopupNotification(LiveWidget):
