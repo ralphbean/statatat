@@ -55,6 +55,7 @@ def webhook(request):
     salt = "TODO MAKE THIS SECRET"
 
     if 'payload' in request.params:
+        # TODO -- check the sha1 X-Hub-Signature to verify this is from github
         payload = request.params['payload']
         if isinstance(payload, basestring):
             payload = json.loads(payload)
