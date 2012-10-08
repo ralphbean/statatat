@@ -1,5 +1,6 @@
 from pyramid.view import view_config
 from pyramid.security import authenticated_userid
+from pyramid.httpexceptions import HTTPFound
 
 import statatat.models as m
 from statatat.widgets.graph import make_chart
@@ -26,6 +27,20 @@ github_events = [
     #"public",
     #"status",
 ]
+
+@view_config(route_name='new_key')
+def new_key(request):
+    username = authenticated_userid(request)
+    if not username:
+        # TODO -- raise the right status code
+        return HTTPFound("/")
+
+    user = m.User.query.filter_by(username=username).one()
+    key = m.SourceKey(notes=request.POST.get('notes'))
+    m.DBSession.add(key)
+    user.source_keys.append(key)
+
+    return HTTPFound(location="/" + username)
 
 
 @view_config(route_name='home', renderer='index.mak')

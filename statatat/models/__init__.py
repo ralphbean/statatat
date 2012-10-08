@@ -3,7 +3,7 @@ from sqlalchemy import (
     Integer,
     DateTime,
     Boolean,
-    Text,
+    UnicodeText,
     ForeignKey,
 )
 
@@ -19,6 +19,7 @@ from sqlalchemy.orm import (
 import pyramid.threadlocal
 import statatat.traversal
 import datetime
+import uuid
 from hashlib import md5
 from .jsonifiable import JSONifiable
 
@@ -29,14 +30,29 @@ Base = declarative_base(cls=JSONifiable)
 Base.query = DBSession.query_property()
 
 
+def keygen(*args, **kw):
+    """ This is how we generate new source keys. """
+    return str(uuid.uuid4())
+
+
+class SourceKey(Base):
+    __tablename__ = 'source_keys'
+    id = Column(Integer, primary_key=True)
+    notes = Column(UnicodeText, nullable=False)
+    value = Column(UnicodeText, unique=True, nullable=False, default=keygen)
+    revoked = Column(Boolean, default=False)
+    user_id = Column(Integer, ForeignKey('users.id'))
+
+
 class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
-    username = Column(Text, unique=True, nullable=False)
-    emails = Column(Text, nullable=False)
+    username = Column(UnicodeText, unique=True, nullable=False)
+    emails = Column(UnicodeText, nullable=False)
     created_on = Column(DateTime, default=datetime.datetime.now)
     widget_configurations = relation('WidgetConfiguration', backref=('user'))
     repos = relation('Repo', backref=('user'))
+    source_keys = relation('SourceKey', backref=('user'))
 
     @property
     def total_enabled_repos(self):
@@ -77,7 +93,7 @@ class User(Base):
 class Repo(Base):
     __tablename__ = 'repos'
     id = Column(Integer, primary_key=True)
-    name = Column(Text, nullable=False)
+    name = Column(UnicodeText, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'))
     enabled = Column(Boolean, default=False)
 
@@ -85,5 +101,5 @@ class Repo(Base):
 class WidgetConfiguration(Base):
     __tablename__ = 'widget_configurations'
     id = Column(Integer, primary_key=True)
-    name = Column(Text, unique=True, nullable=False)
+    name = Column(UnicodeText, unique=True, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'))
