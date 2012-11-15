@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="/static/statatat.css" media="all"/>
     <script type="text/javascript">
       $.extend($.gritter.options, {
-        position: 'bottom-left',
+        position: 'bottom-right',
         fade_in_speed: 'medium',
         fade_out_speed: 500,
         time: 2500,

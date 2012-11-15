@@ -126,3 +126,10 @@ def repo_toggle_enabled(request):
         'enabled': request.context.enabled,
         'repo': request.context.__json__(),
     }
+
+
+@view_config(name='revoke', context=m.SourceKey, renderer='json')
+def source_key_revoke(request):
+    key = request.context
+    key.revoked = True
+    return key.__json__()

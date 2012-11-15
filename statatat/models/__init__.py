@@ -32,7 +32,7 @@ Base.query = DBSession.query_property()
 
 def keygen(*args, **kw):
     """ This is how we generate new source keys. """
-    return str(uuid.uuid4())
+    return md5(str(uuid.uuid4())).hexdigest()
 
 
 class SourceKey(Base):
@@ -54,6 +54,9 @@ class User(Base):
     repos = relation('Repo', backref=('user'))
     source_keys = relation('SourceKey', backref=('user'))
 
+    # TODO -- store their fullname
+    name = "TODO -- implement full name"
+
     @property
     def total_enabled_repos(self):
         return sum([1 for repo in self.repos if repo.enabled])
@@ -68,11 +71,17 @@ class User(Base):
         digest = md5(email).hexdigest()
         return "http://www.gravatar.com/avatar/%s" % digest
 
+    avatar_url = avatar
+
     @property
     def created_on_fmt(self):
         return str(self.created_on)
 
     def __getitem__(self, key):
+        if key == 'source_key':
+            # Traversal is ridiculous.
+            return dict([(k.value, k) for k in self.source_keys])
+
         for r in self.repos:
             if r.name == key:
                 return r

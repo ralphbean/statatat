@@ -2,10 +2,10 @@
 <div class="content">
   <div class="row">
     <span class="span8 offset2 profile-header">
-      <div class="photo-64"><img src="${w.gh_user.avatar_url}&s=64" /></div>
+      <div class="photo-64"><img src="${w.user.avatar_url}&s=64" /></div>
       <h1>
         ${w.user.username}
-        <small>${w.gh_user.name}</small>
+        <small>${w.user.name}</small>
       </h1>
     </span>
   </div>
@@ -29,23 +29,23 @@
           <th></th>
         </tr>
       </tr>
-      % for key in w.user.source_keys:
+      % for key in reversed(w.user.source_keys):
         <tr>
           <td>${key.notes}</td>
           % if not key.revoked:
             <td><input
-              class="input-medium"
+              class="input-xlarge"
               readonly="readonly"
               value="${key.value}"/>
             </td>
-            <td><button class="btn btn-danger">Revoke</button></td>
+            <td>${w.make_revoke_button(key.value)}</td>
           % else:
             <td><input
-              class="input-medium"
+              class="input-xlarge"
               disabled="disabled"
               value="${key.value}"/>
             </td>
-            <td></td>
+            <td><small><em>(revoked)</em></small></td>
           % endif
         </tr>
       % endfor
@@ -54,34 +54,35 @@
   </span>
 </div>
 
-<div class="vspace"></div>
-
-<div class="row">
-  <span class="span8 offset2">
-    <h1>"Batteries-included" Sources -- Github Repos</h1>
-    <p><a class="brand" href="#">statatat.ws</a> can add its hooks to your
-      github repositories automatically.  Anytime commits are pushed to a
-      repository where a hook is enabled, you can see them appear anywhere
-      your have realtime charts embedded.</p>
-    <table class="table table-condensed table-hover table-striped">
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Language</th>
-        <th>Hook?</th>
-      </tr>
-      % for repo in w.gh_repos:
-        <tr>
-          <td>${repo.name}</td>
-          <td>${repo.description}</td>
-          <td>${repo.language}</td>
-          <td>${w.make_button(repo.name) | n}</td>
-        </tr>
-      % endfor
-    </table>
-  </span>
-</div>
-</div>
+## TODO -- go back to work on github stuff later.  It was really slick.  :)
+##<div class="vspace"></div>
+##
+##<div class="row">
+##  <span class="span8 offset2">
+##    <h1>"Batteries-included" Sources -- Github Repos</h1>
+##    <p><a class="brand" href="#">statatat.ws</a> can add its hooks to your
+##      github repositories automatically.  Anytime commits are pushed to a
+##      repository where a hook is enabled, you can see them appear anywhere
+##      your have realtime charts embedded.</p>
+##    <table class="table table-condensed table-hover table-striped">
+##      <tr>
+##        <th>Name</th>
+##        <th>Description</th>
+##        <th>Language</th>
+##        <th>Hook?</th>
+##      </tr>
+##      % for repo in w.gh_repos:
+##        <tr>
+##          <td>${repo.name}</td>
+##          <td>${repo.description}</td>
+##          <td>${repo.language}</td>
+##          <td>${w.make_github_button(repo.name) | n}</td>
+##        </tr>
+##      % endfor
+##    </table>
+##  </span>
+##</div>
+##</div>
 
 <div class="modal hide fade" id="new_key_modal" tabindex="-1" role="dialog" aria-labelledby="new_key_modal_label" aria-hidden="true">
   <form action="/key/new" method="POST">
