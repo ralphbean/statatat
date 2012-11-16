@@ -8,6 +8,13 @@ from moksha.wsgi.widgets.api import get_moksha_socket
 import BeautifulSoup
 
 
+def intify(value):
+    try:
+        return int(value)
+    except ValueError:
+        return value
+
+
 # Embedding the widget in an iframe is easy
 @view_config(context="tw2.core.widgets.WidgetMeta",
              name='iframe',
@@ -83,7 +90,7 @@ def widget_view_javascript(request):
     }
 
     params = defaults
-    params.update(dict([(k, int(v)) for k, v in request.params.items()]))
+    params.update(dict([(k, intify(v)) for k, v in request.params.items()]))
 
     # Get http://statatat.ws/ and strip the trailing slash.
     prefix = get_current_request().resource_url(None)[:-1]

@@ -32,11 +32,11 @@ class FloatingPointMessagesTimeSeries(TimeSeriesChart, LiveWidget):
     data = [0] * n
 
 
-def make_chart(backend, topic="*"):
-    return MessagesTimeSeries(backend=backend, topic=topic)
+def make_chart(backend):
+    return MessagesTimeSeries(backend=backend)
 
-def make_sysinfo_chart(backend, topic="*"):
-    return FloatingPointMessagesTimeSeries(backend=backend, topic=topic)
+def make_sysinfo_chart(backend):
+    return FloatingPointMessagesTimeSeries(backend=backend)
 
 
 class PopupNotification(LiveWidget):

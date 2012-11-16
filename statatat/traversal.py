@@ -51,18 +51,19 @@ class WidgetApp(object):
                                                          topic="sysinfo")
 
     def handle_user(self, query):
-        user = query.first()
+        #user = query.first()
 
-        salt = "TODO MAKE THIS SECRET"
-        topics = ",".join((
-            "%s.%s" % ("author", md5(salt + email).hexdigest())
-            for email in user.emails
-        ))
+        # Old github stuff..
+        #salt = "TODO MAKE THIS SECRET"
+        #topics = ",".join((
+        #    "%s.%s" % ("author", md5(salt + email).hexdigest())
+        #    for email in user.emails
+        #))
 
         backend_key = "moksha.livesocket.backend"
         backend = self.__parent__.request.registry.settings[backend_key]
 
-        return statatat.widgets.graph.make_chart(backend=backend, topic=topics)
+        return statatat.widgets.graph.make_chart(backend=backend)
 
 
 class ApiApp(object):

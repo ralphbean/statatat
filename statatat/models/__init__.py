@@ -104,7 +104,7 @@ class User(Base):
         prefix = pyramid.threadlocal.get_current_request().resource_url(None)
         tmpl = "{prefix}widget/{username}/embed.js" + \
                 "?width=400&height=55&duration=1600&n=100" + \
-                "&source_key={source_key}"
+                "&topic={source_key}"
         link = tmpl.format(prefix=prefix, username=self.username,
                            source_key=source_key)
         return "<script type='text/javascript' src='%s'></script>" % link
