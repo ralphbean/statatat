@@ -18,6 +18,7 @@ class RootApp(dict):
         dict.__init__(self)
         self.request = request
         self.static = dict(
+            webhooks=WebHookApp(),
             api=ApiApp(),
             widget=WidgetApp(),
         )
@@ -70,6 +71,10 @@ class ApiApp(object):
         if query.count() != 1:
             raise KeyError("No such user")
         return query.one()
+
+
+class WebHookApp(object):
+    pass
 
 
 class UserApp(statatat.widgets.UserProfile):
