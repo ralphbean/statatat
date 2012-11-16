@@ -12,11 +12,12 @@
 
   <div class="row">
     <span class="span8 offset2">
-      <h1>DIY Sources</h1>
+      <h1>API Keys</h1>
       <p>These are the keys to your car.  Try to keep them secret.</p>
       <p>Create a new <code>source_key</code> for each distinct data series
-        you want to chart.  You can include multiple <code>source_key</code>
-        values as sources in a single chart.  You'll need to copy-and-paste and
+        you want to chart.
+        ##You can include multiple <code>source_key</code> values as sources in a single chart.
+        You'll need to copy-and-paste and
         use the <code>source_key</code> in any scripts you build that feed
         <a class="brand" href="#">statatat.ws</a>.  See
         <a href="http://statatat.readthedocs.org/en/latest/usage">

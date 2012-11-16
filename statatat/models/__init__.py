@@ -74,6 +74,15 @@ class User(Base):
     avatar_url = avatar
 
     @property
+    def active_source_keys(self):
+        keys = []
+        for key in self.source_keys:
+            if not key.revoked:
+                keys.append(key)
+
+        return keys
+
+    @property
     def created_on_fmt(self):
         return str(self.created_on)
 
@@ -91,11 +100,13 @@ class User(Base):
     def repo_by_name(self, repo_name):
         return self[repo_name]
 
-    def widget_link(self):
+    def widget_link(self, source_key):
         prefix = pyramid.threadlocal.get_current_request().resource_url(None)
         tmpl = "{prefix}widget/{username}/embed.js" + \
-                "?width=400&height=55&duration=1600&n=100"
-        link = tmpl.format(prefix=prefix, username=self.username)
+                "?width=400&height=55&duration=1600&n=100" + \
+                "&source_key={source_key}"
+        link = tmpl.format(prefix=prefix, username=self.username,
+                           source_key=source_key)
         return "<script type='text/javascript' src='%s'></script>" % link
 
 

@@ -15,15 +15,15 @@ def stats(request):
     latest_registered = m.User.query\
             .order_by(m.User.created_on.desc()).limit(n).all()
 
-    all_users = m.User.query.all()
-    by_total_enabled_repos = sorted(
-        all_users,
-        lambda x, y: cmp(x.total_enabled_repos, y.total_enabled_repos),
-        reverse=True,
-    )[:n]
-    by_percent_enabled_repos = sorted(
-        all_users,
-        lambda x, y: cmp(x.percent_enabled_repos, y.percent_enabled_repos),
-        reverse=True,
-    )[:n]
+    #all_users = m.User.query.all()
+    #by_total_enabled_repos = sorted(
+    #    all_users,
+    #    lambda x, y: cmp(x.total_enabled_repos, y.total_enabled_repos),
+    #    reverse=True,
+    #)[:n]
+    #by_percent_enabled_repos = sorted(
+    #    all_users,
+    #    lambda x, y: cmp(x.percent_enabled_repos, y.percent_enabled_repos),
+    #    reverse=True,
+    #)[:n]
     return locals()

@@ -36,7 +36,7 @@
             %if request.user:
               <li class="${['', 'active'][request.on_profile]}">
               <a href="/${request.user.username}">
-                Profile
+                Keys
               </a>
               </li>
               <li class="">
@@ -73,7 +73,17 @@
       </div>
       <div class="modal-body">
         <p>Copy-and-paste the following into another webpage.</p>
-        <p>Your commits <input value="${request.user.widget_link() | n}" /></p>
+        <table class="table">
+          % for source_key in reversed(request.user.active_source_keys):
+          <tr>
+            <td>${source_key.notes}</td>
+            <td>
+              <textarea rows=5 readonly="readonly">${request.user.widget_link(source_key.value) | n}</textarea>
+            </td>
+          </tr>
+          % endfor
+        </table>
+        ##<p>Your commits <input value="${request.user.widget_link() | n}" /></p>
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
