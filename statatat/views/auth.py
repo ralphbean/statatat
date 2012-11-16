@@ -8,7 +8,7 @@ from pyramid.security import (
 
 import statatat.models as m
 
-from statatat.views import make_moksha_hub
+from statatat.hub import make_moksha_hub
 
 
 @view_config(context='velruse.AuthenticationComplete')

@@ -12,6 +12,21 @@ function subscribe(link) {
             }
         },
         error: function(json, stat, xhr) {
+            // TODO -- this could be better.
+            console.log('error');
+            console.log(json);
+        },
+    });
+}
+
+function revoke(link) {
+    $.ajax(link, {
+        success: function(json, stat, xhr) {
+            var sel = $("#" + json.value);
+            sel.parent().parent().hide('slow');
+        },
+        error: function(json, stat, xhr) {
+            // TODO -- this could be better.
             console.log('error');
             console.log(json);
         },
