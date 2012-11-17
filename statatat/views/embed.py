@@ -44,7 +44,7 @@ function include_js(url, success) {
             done = true;
             success();  // Do the callback
             script.onload = script.onreadystatechange = null;
-            head.removeChild(script);
+            head.removeChild(script);  /* poof */
         };
     };
     head.appendChild(script);
