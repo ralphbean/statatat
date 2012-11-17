@@ -83,6 +83,15 @@ class User(Base):
         return keys
 
     @property
+    def revoked_source_keys(self):
+        keys = []
+        for key in self.source_keys:
+            if key.revoked:
+                keys.append(key)
+
+        return keys
+
+    @property
     def created_on_fmt(self):
         return str(self.created_on)
 

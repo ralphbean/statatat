@@ -30,29 +30,46 @@
           <th></th>
         </tr>
       </tr>
-      % for key in reversed(w.user.source_keys):
+      % for key in reversed(w.user.active_source_keys):
         <tr>
           <td>${key.notes}</td>
-          % if not key.revoked:
-            <td><input
-              class="input-xlarge"
-              readonly="readonly"
-              value="${key.value}"/>
-            </td>
-            <td>${w.make_revoke_button(key.value)}</td>
-          % else:
-            <td><input
-              class="input-xlarge"
-              disabled="disabled"
-              value="${key.value}"/>
-            </td>
-            <td><small><em>(revoked)</em></small></td>
-          % endif
+          <td><input
+            class="input-xlarge"
+            readonly="readonly"
+            value="${key.value}"/>
+          </td>
+          <td>${w.make_revoke_button(key.value)}</td>
         </tr>
       % endfor
     </table>
-    <button href="#new_key_modal" data-toggle="modal" class="btn btn-primary">New Key</button>
-  </span>
+    <button id="new-key" href="#new_key_modal" data-toggle="modal"
+      class="btn btn-primary">New Key</button>
+
+    <div class="vspace"></div>
+
+    % if w.user.revoked_source_keys:
+      <h1>Revoked Keys</h1>
+      <table class="table table-condensed table-hover table-striped">
+        <tr>
+          <th>Notes</th>
+          <th>source_key</th>
+          <th></th>
+        </tr>
+      </tr>
+      % for key in reversed(w.user.revoked_source_keys):
+        <tr>
+          <td>${key.notes}</td>
+          <td><input
+            class="input-xlarge"
+            disabled="disabled"
+            value="${key.value}"/>
+          </td>
+          <td><small><em>(revoked)</em></small></td>
+        </tr>
+      % endfor
+    </table>
+  % endif
+</span>
 </div>
 
 ## TODO -- go back to work on github stuff later.  It was really slick.  :)
