@@ -61,7 +61,7 @@
 
     <div class="vspace"></div>
 
-    <div class="container-fluid">
+    <div class="container">
       ${self.body()}
     </div>
 
