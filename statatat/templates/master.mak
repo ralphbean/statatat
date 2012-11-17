@@ -31,7 +31,7 @@
           <a class="brand" href="http://statatat.ws">statatat.ws</a>
           <ul class="nav pull-right">
             <li class="${['', 'active'][request.on_stats]}">
-              <a href="/stats">Stats</a>
+            <a href="/stats">Stats</a>
             </li>
             %if request.user:
               <li class="${['', 'active'][request.on_profile]}">
@@ -40,7 +40,7 @@
               </a>
               </li>
               <li class="">
-                <a href="#widgets_modal" data-toggle="modal">Widgets</a>
+              <a href="#widgets_modal" data-toggle="modal">Widgets</a>
               </li>
             %endif
             <li class="">
@@ -66,29 +66,83 @@
     </div>
 
     %if request.user:
-    <div class="modal hide fade" id="widgets_modal" tabindex="-1" role="dialog" aria-labelledby="widgets_modal_label" aria-hidden="true">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="widgets_modal_label">Embeddable Widgets</h3>
+      <div class="modal hide fade" id="widgets_modal" tabindex="-1" role="dialog" aria-labelledby="widgets_modal_label" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="widgets_modal_label">Build an Embeddable Widget</h3>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <span> <!-- class="span4"> -->
+              <form id="widget-form" class="form-horizontal">
+                <div class="control-group">
+                  <label class="control-label">Width</label>
+                  <div class="controls">
+                    <div class="input-append">
+                      <input class="input-mini right" value="400">
+                      <span class="add-on">px</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Height</label>
+                  <div class="controls">
+                    <div class="input-append">
+                      <input class="input-mini right" value="55">
+                      <span class="add-on">px</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Duration</label>
+                  <div class="controls">
+                    <div class="input-append">
+                      <input class="input-mini right" value="1600">
+                      <span class="add-on">ms</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Buckets</label>
+                  <div class="controls">
+                    <div class="input-prepend">
+                      <span class="add-on">#</span>
+                      <input class="input-mini" value="100">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <label class="control-label">Source Key</label>
+                  <div class="controls">
+                    % for source_key in reversed(request.user.active_source_keys):
+                      <label class="radio">
+                        <input type="radio"
+                        name="options_source_keys"
+                        id="${source_key.value}"
+                        value="${source_key.value}">
+                        ${source_key.notes}
+                      </label>
+                    % endfor
+                  </div>
+                </div>
+              </form>
+            </span>
+          </div>
+
+          <div class="row"><h1 class="centered">⇣⇣⇣</h1></div>
+          <div class="row"><h4 class="centered">Copy-and-paste</h4></div>
+          <div class="row">
+            <textarea id="copy-pasta" rows=3 readonly="readonly">${request.user.widget_link(source_key.value) | n}</textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
       </div>
-      <div class="modal-body">
-        <p>Copy-and-paste the following into another webpage.</p>
-        <table class="table">
-          % for source_key in reversed(request.user.active_source_keys):
-          <tr>
-            <td>${source_key.notes}</td>
-            <td>
-              <textarea rows=5 readonly="readonly">${request.user.widget_link(source_key.value) | n}</textarea>
-            </td>
-          </tr>
-          % endfor
-        </table>
-        ##<p>Your commits <input value="${request.user.widget_link() | n}" /></p>
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-      </div>
-    </div>
     %endif
 
     ${moksha_socket.display() |n }
@@ -101,6 +155,5 @@
       <a href="http://github.com/ralphbean/statatat">on github.</a>
     </p>
     </footer>
-
   </body>
 </html>

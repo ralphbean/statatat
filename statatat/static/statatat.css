@@ -89,3 +89,18 @@ form.navbar-form {
     margin-left: 50px;
     padding-top: 2px;
 }
+
+/* Various rules to do with fixing bootstrap for our new-widget form */
+.right { text-align: right; }
+.centered { text-align: center; }
+.input-append .add-on { margin-left: -5px; }
+.input-prepend .add-on { margin-right: -5px; }
+.form-horizontal .control-group { margin-bottom: 10px; }
+#widget-form {
+    margin-left: 100px;
+    width: 375px;
+}
+#copy-pasta {
+    margin-left: 100px;
+    width: 375px;
+}
