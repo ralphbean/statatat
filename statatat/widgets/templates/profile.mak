@@ -20,8 +20,7 @@
         You'll need to copy-and-paste and
         use the <code>source_key</code> in any scripts you build that feed
         <a class="brand" href="#">statatat.ws</a>.  See
-        <a href="http://statatat.readthedocs.org/en/latest/usage">
-          the documentation</a> for how to use these.</p>
+        <a href="/docs">the documentation</a> for how to use these.</p>
 
       <table class="table table-condensed table-hover table-striped">
         <tr>
@@ -106,7 +105,7 @@
   <form action="/key/new" method="POST">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <h3 id="new_key_modal_label">New Service Key</h3>
+      <h3 id="new_key_modal_label">New Source Key</h3>
     </div>
     <div class="modal-body">
       <input type="text" placeholder="Notes" id="notes" name="notes"/>

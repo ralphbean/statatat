@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>statatat</title>
     <link rel="stylesheet" type="text/css" href="/static/statatat.css" media="all"/>
     <script type="text/javascript">
       $.extend($.gritter.options, {
@@ -31,6 +32,9 @@
           <a class="brand"
             href="http://statatat.ws">statatat.ws <small>(alpha)</small></a>
           <ul class="nav pull-right">
+            <li class="${['', 'active'][request.on_docs]}">
+            <a href="/docs">Docs</a>
+            </li>
             <li class="${['', 'active'][request.on_stats]}">
             <a href="/stats">Stats</a>
             </li>

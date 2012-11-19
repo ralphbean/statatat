@@ -81,3 +81,7 @@ def source_key_revoke(request):
     key = request.context
     key.revoked = True
     return key.__json__()
+
+@view_config(route_name='docs', renderer='docs.mak')
+def docs(request):
+    return {}

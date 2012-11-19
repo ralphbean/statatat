@@ -28,6 +28,7 @@ def inject_globals(event):
     # This is a terrible way of doing things.
     request.on_profile = request.user and request.url.endswith(request.user.username)
     request.on_stats = request.url.endswith('/stats')
+    request.on_docs = request.url.endswith('/docs')
 
     # Expose these as global attrs for our templates
     event['moksha_socket'] = get_moksha_socket(request.registry.settings)
