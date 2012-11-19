@@ -155,6 +155,8 @@
       <a href="http://github.com/ralphbean/statatat">on github.</a>
     </p>
     </footer>
+
+    %if request.user:
     <script type="text/javascript">
     $(document).ready(function() {
       var prefix = window.location.protocol + "//" + window.location.host + "/widget/${request.user.username}/embed.js";
@@ -169,6 +171,7 @@
         );
       });
     });
+    % endif
     </script>
   </body>
 </html>
