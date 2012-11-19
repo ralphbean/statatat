@@ -79,7 +79,7 @@
                   <label class="control-label">Width</label>
                   <div class="controls">
                     <div class="input-append">
-                      <input class="input-mini right" value="400">
+                      <input id='width' class="input-mini right" value="400">
                       <span class="add-on">px</span>
                     </div>
                   </div>
@@ -89,7 +89,7 @@
                   <label class="control-label">Height</label>
                   <div class="controls">
                     <div class="input-append">
-                      <input class="input-mini right" value="55">
+                      <input id='height' class="input-mini right" value="55">
                       <span class="add-on">px</span>
                     </div>
                   </div>
@@ -99,7 +99,7 @@
                   <label class="control-label">Duration</label>
                   <div class="controls">
                     <div class="input-append">
-                      <input class="input-mini right" value="1600">
+                      <input id='duration' class="input-mini right" value="1600">
                       <span class="add-on">ms</span>
                     </div>
                   </div>
@@ -110,7 +110,7 @@
                   <div class="controls">
                     <div class="input-prepend">
                       <span class="add-on">#</span>
-                      <input class="input-mini" value="100">
+                      <input id='n' class="input-mini" value="100">
                     </div>
                   </div>
                 </div>
@@ -122,7 +122,7 @@
                       <label class="radio">
                         <input type="radio"
                         name="options_source_keys"
-                        id="${source_key.value}"
+                        id="topic"
                         value="${source_key.value}">
                         ${source_key.notes}
                       </label>
@@ -155,5 +155,20 @@
       <a href="http://github.com/ralphbean/statatat">on github.</a>
     </p>
     </footer>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var prefix = window.location.protocol + "//" + window.location.host + "/widget/${request.user.username}/embed.js";
+      $("form input").change(function (evt) {
+        var values = {}, url = null;
+        $("#widget-form input").each(function() {
+            values[this.id] = $(this).val()
+        });
+        url = prefix + "?" + $.param(values);
+        $("#copy-pasta").val(
+          "<script type='text/javascript' src='" + url + "'><\/script>"
+        );
+      });
+    });
+    </script>
   </body>
 </html>
