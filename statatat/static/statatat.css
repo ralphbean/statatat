@@ -1,6 +1,9 @@
 body {
 }
 
+.brand small {
+    font-size: 60%;
+}
 .photo-64 {
     width: 64px;
     height: 64px;

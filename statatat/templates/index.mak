@@ -4,11 +4,15 @@
   <div class="row">
     <span class="span10 offset1">
       <div class="hero-unit">
-        <h1>Realtime dev widgets.</h1>
-        <p>Statatat provides embeddable, WebSocket-driven charts of your github
-          activity.
-          Enable the webhook for your repositories, and include the javascript
-          scriptlet on your page for <em>fanciness</em>.</p>
+        <h1>Embeddable realtime charts.</h1>
+            <p>Statatat provides embeddable, WebSocket-driven charts of
+              whatever data you can stuff into it.</p>
+            <iframe
+              src="http://player.vimeo.com/video/52403245?badge=0"
+              width="100%" height="230" frameborder="0" webkitAllowFullScreen
+              mozallowfullscreen allowFullScreen></iframe>
+        </div>
+
       </div>
     </span>
   </div>
@@ -22,14 +26,14 @@
   <div class="row">
     <span class="span2 offset1">
       <h2>Swank</h2>
-      <p>By embedding your Statatat widget on your blog, you can show
-        off your daily foo to your friends.</p>
+      <p>By embedding your Statatat widget on your site, you can show off
+        whatever activity to your friends.</p>
     </span>
     <span class="span3">
       <h2>Dashboard</h2>
-      <p>Hosting a hackathon?  Throw together a quick page including the
-        Statatat widgets of the participants and keep it on a big screen
-        for status updates.</p>
+      <p>Hosting a hackathon?  Throw together git post-receive hooks and a
+        twitter scraper to make a conference for the big screen.
+      </p>
       <div class="logo">
         <img style="height:80px" src="http://upload.wikimedia.org/wikipedia/commons/0/0d/BarCamp_logo.png"/>
       </div>
