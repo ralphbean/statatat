@@ -5,6 +5,9 @@ import statatat.models
 import statatat.widgets
 import statatat.widgets.graph
 
+import pyramid.threadlocal
+import pyramid.security
+
 
 def make_root(request):
     return RootApp(request)
@@ -32,9 +35,17 @@ class RootApp(dict):
         query = statatat.models.User.query.filter_by(username=key)
         if query.count() != 1:
             raise KeyError("No such user")
+
+        # TODO -- definitely not the right way to be doing this.
+        request = pyramid.threadlocal.get_current_request()
+        username = pyramid.security.authenticated_userid(request)
+        if username != key:
+            raise KeyError("Not allowed")
+
         return UserApp(user=query.one())
 
 
+# TODO - this whole thing needs cleaned up.  it contains cruft.
 class WidgetApp(object):
     def __getitem__(self, key):
         query = statatat.models.User.query.filter_by(username=key)
@@ -71,6 +82,13 @@ class ApiApp(object):
         query = statatat.models.User.query.filter_by(username=key)
         if query.count() != 1:
             raise KeyError("No such user")
+
+        # TODO -- definitely not the right way to be doing this.
+        request = pyramid.threadlocal.get_current_request()
+        username = pyramid.security.authenticated_userid(request)
+        if username != key:
+            raise KeyError("Not allowed")
+
         return query.one()
 
 
