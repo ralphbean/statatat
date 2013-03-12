@@ -87,7 +87,7 @@
         then your chart's domain will be from the present back 10 seconds into
         the past.  Just for one more example, if you have a
         <code>duration</code> of 2000 and an <code>n</code> value of 120, then
-        you chart will show data from the past 4 minutes.</p>
+        your chart will show data from the past 4 minutes.</p>
 
       <p>Embedding your chart is easy; just copy and paste from the widget
         creation dialog into your website of choice.  For example:
