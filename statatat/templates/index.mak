@@ -7,10 +7,12 @@
         <h1>Embeddable realtime charts.</h1>
             <p>Statatat provides embeddable, WebSocket-driven charts of
               whatever data you can stuff into it.</p>
+            <!--
             <iframe
               src="http://player.vimeo.com/video/52403245?badge=0"
               width="100%" height="230" frameborder="0" webkitAllowFullScreen
               mozallowfullscreen allowFullScreen></iframe>
+            -->
         </div>
 
       </div>
