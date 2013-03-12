@@ -70,7 +70,7 @@
       ${self.body()}
     </div>
 
-    %if request.user:
+    %if request.user and request.user.active_source_keys:
       <div class="modal hide fade" id="widgets_modal" tabindex="-1" role="dialog" aria-labelledby="widgets_modal_label" aria-hidden="true">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
