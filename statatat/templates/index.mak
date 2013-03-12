@@ -34,7 +34,7 @@
     <span class="span3">
       <h2>Dashboard</h2>
       <p>Hosting a hackathon?  Throw together git post-receive hooks and a
-        twitter scraper to make a conference for the big screen.
+        twitter scraper to make a conference dashboard for the big screen.
       </p>
       <div class="logo">
         <img style="height:80px" src="http://upload.wikimedia.org/wikipedia/commons/0/0d/BarCamp_logo.png"/>
