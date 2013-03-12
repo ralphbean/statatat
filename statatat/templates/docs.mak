@@ -9,7 +9,9 @@
           href="http://github.com/ralphbean/statatat/issues">list of current
           issues</a> first, and then please file <a
           href="https://github.com/ralphbean/statatat/issues/new">
-          a new issue</a>.
+          a new issue</a>.  You could also come hang out in
+        <code>#statatat</code> on <a
+          href="http://freenode.net/using_the_network.shtml">freenode</a>.
       </p>
       <h2>Feeding Statatat</h2>
       <p>The central object in Statatat is the <code>source_key</code>.  It
