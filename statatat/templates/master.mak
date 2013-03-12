@@ -123,9 +123,12 @@
                 <div class="control-group">
                   <label class="control-label">Source Key</label>
                   <div class="controls">
-                    % for source_key in reversed(request.user.active_source_keys):
+                    % for i, source_key in enumerate(reversed(request.user.active_source_keys)):
                       <label class="radio">
                         <input type="radio"
+                        % if i == 0:
+                          checked="true"
+                        %endif
                         name="options_source_keys"
                         id="topic"
                         value="${source_key.value}">
@@ -168,7 +171,13 @@
       $("form input").change(function (evt) {
         var values = {}, url = null;
         $("#widget-form input").each(function() {
-            values[this.id] = $(this).val()
+          if (this.type == 'radio') {
+            if (this.checked) {
+              values[this.id] = $(this).val();
+            }
+          } else {
+            values[this.id] = $(this).val();
+          }
         });
         url = prefix + "?" + $.param(values);
         $("#copy-pasta").val(
